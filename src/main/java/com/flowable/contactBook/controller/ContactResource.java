@@ -7,35 +7,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
-@RequestMapping("/contact")
+@CrossOrigin
+@RestController
 public class ContactResource {
 
     @Autowired
     private ContactService contactService;
 
-    @PostMapping("/")
+    @PostMapping("/contact")
     public String saveContact(@RequestBody Contact contact){
         return contactService.saveContact(contact);
     }
 
-    @GetMapping("/")
+    @GetMapping("/contacts")
     public List<Contact> getAllContacts(){
         return contactService.getAllContacts();
     }
 
-    @GetMapping("/{contactId}")
+    @GetMapping("/contact/{contactId}")
     public Contact getContactById(@PathVariable int contactId){
         return contactService.getContactById(contactId);
     }
 
-    @PutMapping("/")
+    @PutMapping("/contact")
     public String updateContact(@RequestBody Contact contact){
         return contactService.updateContact(contact);
     }
 
-    @DeleteMapping("/{contactId}")
-    public List<Contact> deleteContactById(@PathVariable int contactId){
+    @DeleteMapping("/contact/{contactId}")
+    public String deleteContactById(@PathVariable int contactId){
         return contactService.deleteContactById(contactId);
     }
 }

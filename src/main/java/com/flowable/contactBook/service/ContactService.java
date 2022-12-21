@@ -15,7 +15,7 @@ public interface ContactService {
 
     public String updateContact(Contact contact);
 
-    public List<Contact> deleteContactById(int contactId);
+    public String deleteContactById(int contactId);
 
 
 }

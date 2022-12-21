@@ -36,20 +36,19 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public String updateContact(Contact contact) {
-        Contact result=this.getContactById(contact.getContactId());
-        result.setContactName(contact.getContactName());
-        result.setContactEmail(contact.getContactEmail());
-        result.setContactNumber(contact.getContactNumber());
-        Contact response=contactRepository.save(result);
-        if(response!=null){
+        if(contactRepository.existsById(contact.getContactId())){
+            contactRepository.save(contact);
             return "Contact updated Successfully!";
         }
         return "Contact Updating Failed!";
     }
 
     @Override
-    public List<Contact> deleteContactById(int contactId) {
+    public String deleteContactById(int contactId) {
         contactRepository.deleteById(contactId);
-        return this.getAllContacts();
+        if(contactRepository.existsById(contactId)){
+            return "Deleted Successfully!";
+        }
+        return "Unable to delete Contact by Id";
     }
 }
